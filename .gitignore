@@ -1,0 +1,6 @@
+# Ce dépôt est PUBLIC. Il n'accueille que des pages de questions.
+# Aucun plan, aucune revue, aucun document interne.
+p/
+plans/
+*.md
+!README.md
