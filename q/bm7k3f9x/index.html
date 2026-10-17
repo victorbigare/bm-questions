@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bahia Mala — 16 questions</title>
+<title>Bahia Mala — 12 questions</title>
 <style>
 :root{--pap:#f1efe9;--enc:#1b2235;--dou:#6b7183;--fil:#e0dbd0;--nav:#1d2a4a;
   --ok:#2e7d4f}
@@ -53,7 +53,7 @@ button[disabled]{background:#b8b3a8;cursor:default}
 </style></head><body>
 <main>
   <p class="mq">BAHIA MALA</p>
-  <p class="sub">Seize questions. Six minutes.</p>
+  <p class="sub">Douze questions. Cinq minutes.</p>
   <p class="intro">Bonjour Emilie, tape une réponse par question,
      puis le bouton en bas. Un seul message partira, avec tout dedans.</p>
   <form id="f"></form>
@@ -64,7 +64,7 @@ button[disabled]{background:#b8b3a8;cursor:default}
   <p class="pied">Rien ne sera publié sans que tu l'aies validé.</p>
 </main>
 <script>
-const QS = [{"titre": "Ton compte Instagram est en Business ou en Creator ?", "aide": "Sans l'un des deux, rien ne peut être programmé ni mesuré.", "options": ["Business", "Creator", "Compte personnel", "Je ne sais pas"]}, {"titre": "Ton objectif numéro un pour 2026 ?", "aide": "Un seul des trois. C'est ce qui décide de tout le reste du plan.", "options": ["Vendre en ligne", "Trouver des revendeurs", "Être connue"]}, {"titre": "Peux-tu me donner accès à ton compte Instagram ?", "aide": "Meta Business Suite > Paramètres > Utilisateurs > Ajouter. Trente secondes, et tu retires l'accès quand tu veux. Ton mot de passe ne sort jamais de chez toi.", "options": ["Oui, je le fais cette semaine", "Oui, mais montre-moi comment", "Je préfère le faire avec Victor", "Non, pas pour l'instant"]}, {"titre": "Quand es-tu disponible dix minutes pour faire les accès avec Victor ?", "aide": "Les deux délégations prennent moins de dix minutes à deux, en partage d'écran ou au téléphone. C'est le chemin le plus rapide.", "options": ["Ce soir", "Ce week-end", "En semaine, le matin", "En semaine, le soir", "Je me débrouille seule"]}, {"titre": "Sous quels identifiants sont ouverts tes comptes ?", "aide": "L'adresse mail ou le nom d'utilisateur de chacun — Instagram, la boutique Shopify, la newsletter, le compte Google. Pas les mots de passe : ils ne servent à rien ici et ne doivent circuler nulle part.", "libre": true, "exemple": "Instagram : @bahiamala_collection\nShopify : ...@...\nNewsletter : ...\nGoogle : ..."}, {"titre": "Où est hébergée la boîte mail de la marque ?", "aide": "Pour y accéder par délégation : sur Gmail, roue dentée > Comptes et importation > Accorder l'accès à votre compte. Quatre clics, et tu gardes ton mot de passe.", "options": ["Gmail", "Outlook ou Hotmail", "Chez l'hébergeur du site", "Je ne sais pas"]}, {"titre": "Veux-tu développer le cadeau d'entreprise personnalisé ?", "aide": "C'est annoncé sur ta fiche Maison&Objet, mais absent du site et d'Instagram.", "options": ["Oui, ça m'intéresse", "Non, j'ai arrêté", "Plus tard"]}, {"titre": "La publicité payante, on la garde pour plus tard ?", "aide": "On commence sans budget. Tu décideras quand quelque chose marchera déjà.", "options": ["D'accord, plus tard", "Non, j'ai un budget maintenant"]}, {"titre": "Accepterais-tu de mettre ta voix sur les vidéos ?", "aide": "Pas ton visage, juste la voix. C'est ce qui change le plus la portée d'un reel.", "options": ["Oui", "Non", "À tester une fois"]}, {"titre": "As-tu gardé des messages de clients contents ?", "aide": "Mails, messages privés Instagram, WhatsApp. Même trois lignes suffisent. Il n'existe aujourd'hui aucun avis public sur Bahia Mala.", "options": ["Oui, j'en ai", "Je regarde et je t'envoie", "Non, rien de gardé"]}, {"titre": "Les bougies à galon bleu et beige sur corde de jute, c'est bien la Salta ?", "aide": "Pour nommer la bonne matière dans les publications, sans inventer.", "options": ["Oui, c'est la Salta", "Non, c'est une autre", "Je vérifie et je te dis"]}, {"titre": "On ne fait pas de Black Friday, et on le dit publiquement ?", "aide": "Une remise un vendredi dit que le prix des autres jours était faux. La position proposée : l'assumer une fois, le 28 novembre.", "options": ["D'accord, pas de promo", "Je préfère faire une promo", "À en discuter"]}, {"titre": "Quelles sont tes conditions revendeur ?", "aide": "Remise, minimum de commande, délai. Sans ça, impossible de prospecter une boutique.", "libre": true, "exemple": "Par exemple : -40 %, minimum 6 pièces, livraison sous 3 semaines"}, {"titre": "À part Isidore Home, quelles boutiques te vendent aujourd'hui ?", "aide": "C'est le seul revendeur que j'ai trouvé en ligne.", "libre": true, "exemple": "Les noms et les villes suffisent"}, {"titre": "Quels chiffres puis-je citer publiquement ?", "aide": "Nombre de bougies vendues, de clients, de pays. Un seul chiffre vrai vaut mieux que dix adjectifs.", "libre": true, "exemple": "Par exemple : 3 000 bougies vendues, 11 pays"}, {"titre": "Qui d'autre a les accès au site et à la newsletter ?", "aide": "Pour savoir à qui demander quoi.", "libre": true, "exemple": "Un nom, ou « personne, c'est moi »"}];
+const QS = [{"titre": "Ton compte Instagram est en Business ou en Creator ?", "aide": "Sans l'un des deux, rien ne peut être programmé ni mesuré.", "options": ["Business", "Creator", "Compte personnel", "Je ne sais pas"]}, {"titre": "Ton objectif numéro un pour 2026 ?", "aide": "Un seul des trois. C'est ce qui décide de tout le reste du plan.", "options": ["Vendre en ligne", "Trouver des revendeurs", "Être connue"]}, {"titre": "Sous quels identifiants sont ouverts tes comptes ?", "aide": "L'adresse mail ou le nom d'utilisateur de chacun : Instagram, la boutique Shopify, la newsletter, le compte Google.", "libre": true, "exemple": "Instagram : @bahiamala_collection\nShopify : ...\nNewsletter : ...\nGoogle : ..."}, {"titre": "Veux-tu développer le cadeau d'entreprise personnalisé ?", "aide": "C'est annoncé sur ta fiche Maison&Objet, mais absent du site et d'Instagram.", "options": ["Oui, ça m'intéresse", "Non, j'ai arrêté"], "autre": "Si c'est plus nuancé, écris-le ici"}, {"titre": "Accepterais-tu de mettre ta voix sur les vidéos ?", "aide": "Pas ton visage, juste la voix. C'est ce qui change le plus la portée d'un reel.", "options": ["Oui", "Non", "À tester une fois"]}, {"titre": "Quels messages de clients contents as-tu gardés ?", "aide": "Mails, messages privés Instagram, WhatsApp. Recopie-les ici, même imparfaitement. Il n'existe aujourd'hui aucun avis public sur Bahia Mala, et c'est le trou le plus facile à combler.", "libre": true, "exemple": "Le prénom et ce qu'ils ont écrit suffisent"}, {"titre": "Les bougies à galon bleu et beige sur corde de jute, c'est bien la Salta ?", "aide": "Pour nommer la bonne matière dans les publications, sans inventer.", "options": ["Oui, c'est la Salta"], "autre": "Si c'est une autre, écris laquelle et quelle matière"}, {"titre": "Fait-on une opération Black Friday cette année ?", "aide": "Le 27 novembre. Une remise dit que le prix des autres jours était trop haut — mais il existe d'autres façons de marquer le coup.", "options": ["Oui, une remise", "Oui, mais sans remise : cadeau offert ou édition limitée", "Non, on n'y participe pas et on l'assume publiquement"], "autre": "Une autre idée ?"}, {"titre": "Quelles sont tes conditions revendeur ?", "aide": "Remise, minimum de commande, délai. Sans ça, impossible d'approcher une boutique.", "libre": true, "exemple": "Par exemple : -40 %, minimum 6 pièces, livraison sous 3 semaines"}, {"titre": "À part Isidore Home, quelles boutiques te vendent aujourd'hui ?", "aide": "C'est le seul revendeur que j'ai trouvé en ligne.", "libre": true, "exemple": "Les noms et les villes suffisent"}, {"titre": "Quels chiffres puis-je citer publiquement ?", "aide": "Bougies vendues, clients, pays livrés. Un seul chiffre vrai vaut mieux que dix adjectifs.", "libre": true, "exemple": "Par exemple : 3 000 bougies vendues, 11 pays"}, {"titre": "Quel budget publicité, s'il y en a un ?", "aide": "On peut très bien commencer sans. Dis-moi simplement où tu en es.", "options": ["Aucun pour l'instant", "Oui, j'ai un budget"], "autre": "Si oui, combien par mois ?"}];
 const DEST = "victorbigare@icloud.com";
 const SUJET = "Bahia Mala \u2014 mes r\u00e9ponses";
 const f = document.getElementById('f'), go = document.getElementById('go'),
@@ -100,13 +100,21 @@ QS.forEach((q, i) => {
       const s = document.createElement('span'); s.textContent = opt;
       l.append(r, s); fs.appendChild(l);
     });
+    if (q.autre) {
+      const t2 = document.createElement('textarea');
+      t2.name = 'q' + i + 'a'; t2.placeholder = q.autre;
+      t2.style.marginTop = '4px'; t2.style.minHeight = '72px';
+      t2.value = rep['q' + i + 'a'] || '';
+      t2.oninput = () => { rep['q' + i + 'a'] = t2.value.trim(); garde(); };
+      fs.appendChild(t2);
+    }
   }
   f.appendChild(fs);
 });
 
 function garde() {
   try { localStorage.setItem(CLE, JSON.stringify(rep)); } catch (e) {}
-  const n = QS.filter((q, i) => rep['q' + i]).length;
+  const n = QS.filter((q, i) => rep['q' + i] || rep['q' + i + 'a']).length;
   go.disabled = n === 0;
   etat.textContent = n === QS.length
     ? 'Toutes les réponses sont là.'
@@ -118,7 +126,8 @@ garde();
 go.onclick = () => {
   const lignes = QS.map((q, i) =>
     'Q' + (i + 1) + ' — ' + q.titre + '\n' +
-    '   ' + (rep['q' + i] || '(pas de réponse)'));
+    '   ' + (rep['q' + i] || '(pas de réponse)') +
+    (rep['q' + i + 'a'] ? '\n   ' + rep['q' + i + 'a'] : ''));
   const corps = lignes.join('\n\n') + '\n\n— Envoyé depuis la page de questions Bahia Mala';
   location.href = 'mailto:' + DEST + '?subject=' +
     encodeURIComponent(SUJET) + '&body=' + encodeURIComponent(corps);
