@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bahia Mala — préparer Noël</title>
+<style>
+:root{--pap:#f1efe9;--enc:#1b2235;--dou:#6b7183;--fil:#e0dbd0;--nav:#1d2a4a;
+  --ok:#2e7d4f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pap);color:var(--enc);
+  font:400 17px/1.6 Georgia,'Times New Roman',serif;
+  padding:22px max(16px,env(safe-area-inset-left)) 40px}
+main{max-width:560px;margin:0 auto;background:#fff;border:1px solid var(--fil);
+  border-radius:12px;padding:26px 22px 28px}
+.mq{font:700 21px/1.2 Helvetica,Arial,sans-serif;letter-spacing:.14em;
+  color:var(--nav);margin:0 0 4px}
+.sub{margin:0 0 18px;padding-bottom:16px;border-bottom:2px solid var(--enc);
+  color:var(--dou);font-size:15px}
+.intro{margin:0 0 6px}
+fieldset{border:0;margin:26px 0 0;padding:0}
+legend{padding:0}
+.num{font:600 12px/1.3 Helvetica,Arial,sans-serif;letter-spacing:.1em;
+  color:#9a8f7d;display:block;margin-bottom:3px}
+.ttl{font:600 19px/1.35 Georgia,serif;display:block}
+.aide{color:var(--dou);font-size:15px;margin:3px 0 12px}
+label{display:flex;align-items:center;gap:12px;border:1.5px solid var(--fil);
+  border-radius:9px;padding:14px 15px;margin-bottom:9px;cursor:pointer;
+  font-size:16.5px;-webkit-tap-highlight-color:transparent}
+label:active{background:#faf8f4}
+input[type=radio]{appearance:none;width:22px;height:22px;flex:0 0 22px;
+  border:2px solid #c3bdb0;border-radius:50%;margin:0;position:relative}
+input[type=radio]:checked{border-color:var(--nav)}
+input[type=radio]:checked::after{content:"";position:absolute;inset:4px;
+  border-radius:50%;background:var(--nav)}
+label:has(:checked){border-color:var(--nav);background:#f4f6fb}
+input[type=radio]:focus-visible{outline:3px solid #8aa4e0;outline-offset:2px}
+textarea{width:100%;border:1.5px solid var(--fil);border-radius:9px;
+  padding:13px;font:inherit;font-size:16.5px;min-height:92px;resize:vertical}
+.envoi{margin-top:30px;padding-top:22px;border-top:1px solid var(--fil)}
+button{width:100%;background:var(--nav);color:#fff;border:0;border-radius:10px;
+  padding:17px 20px;font:600 17px/1.2 Helvetica,Arial,sans-serif;cursor:pointer}
+button[disabled]{background:#b8b3a8;cursor:default}
+.etat{text-align:center;color:var(--dou);font-size:14.5px;margin:11px 0 0}
+.pied{color:var(--dou);font-size:14.5px;margin:22px 0 0}
+@media (prefers-color-scheme:dark){
+  :root{--pap:#14181f;--enc:#e9e7e1;--dou:#99a0b0;--fil:#2d3341;--nav:#7f9fe0}
+  body{background:var(--pap);color:var(--enc)}
+  main{background:#1a1f28;border-color:var(--fil)}
+  label:has(:checked){background:#20283a}
+  textarea{background:#141920;color:var(--enc)}
+  button{color:#101520}
+  .sub{border-bottom-color:var(--enc)}
+}
+</style></head><body>
+<main>
+  <p class="mq">BAHIA MALA</p>
+  <p class="sub">Onze questions, trois minutes. Les quatre premières décident de ce qui part avant Noël.</p>
+  <p class="intro">Bonjour Emilie, tape une réponse par question,
+     puis le bouton en bas. Un seul message partira, avec tout dedans.</p>
+  <form id="f"></form>
+  <div class="envoi">
+    <button id="go" type="button" disabled>Envoyer mes réponses</button>
+    <p class="etat" id="etat"></p>
+  </div>
+  <p class="pied">Rien ne sera publié sans que tu l'aies validé.</p>
+</main>
+<script>
+const QS = [{"titre": "On propose un réassort de Noël à tes revendeurs, par mail, le 27 octobre ?", "aide": "Un mail en français et en anglais, comme tes campagnes B2B, avec la date limite pour être livré avant Noël. La moitié de ton chiffre vient déjà de clients qui recommandent. Tu relis avant l'envoi.", "options": ["Oui, le 27 octobre", "Oui, mais plus tôt", "Oui, mais plus tard dans la saison", "Je préfère les appeler moi-même"], "autre": "Une précision ?"}, {"titre": "Jusqu'à quelle date un revendeur peut-il commander pour être livré avant Noël ?", "aide": "Elle sera écrite dans le mail de réassort. Une date suffit.", "libre": true, "exemple": "Par exemple : le 20 novembre"}, {"titre": "Et un particulier, pour être livré avant le 24 décembre ?", "aide": "Une date pour la Belgique, une pour la France. Elle sert aux posts et aux mails de décembre.", "libre": true, "exemple": "Par exemple : Belgique 19/12, France 16/12"}, {"titre": "Le stock tient-il jusqu'à Noël ?", "aide": "Je ne veux pousser aucune bougie qui sera épuisée le 10 décembre.", "options": ["Tout tient jusqu'à Noël", "Certains modèles vont manquer"], "autre": "Si quelque chose va manquer, écris lequel et vers quelle date"}, {"titre": "Cadeau d'entreprise : à partir de combien de pièces ?", "aide": "Pour l'offre qu'on va proposer aux entreprises de Bruxelles et du Brabant wallon.", "options": ["10 pièces", "20 pièces", "50 pièces"], "autre": "Un autre minimum ?"}, {"titre": "Cadeau d'entreprise : quelle personnalisation peux-tu faire ?", "aide": "Ce qu'on pourra promettre dans l'offre, et rien de plus.", "options": ["Une carte au nom de l'entreprise", "Le logo sur l'emballage ou l'étiquette", "Les deux", "Emballage cadeau Bahia Mala, sans personnalisation"], "autre": "Autre chose ?"}, {"titre": "Cadeau d'entreprise : quel prix pour une commande en nombre ?", "aide": "Les revendeurs ont le coefficient 2,4. Pour une entreprise, tu peux garder le prix public ou faire un geste au-delà d'une quantité.", "options": ["Prix public, sans remise", "-10 % au-delà d'une quantité", "-15 % au-delà d'une quantité"], "autre": "Si remise : à partir de combien de pièces ?"}, {"titre": "On réécrit les mails automatiques de ta boutique ?", "aide": "Six mails partent déjà tout seuls (merci, bienvenue, panier abandonné…) : en 30 jours, aucun n'a donné de commande. On les réécrit dans ta voix, avec tes photos, et on en ajoute deux : une demande d'avis dix jours après la livraison, et un rappel de recharge quand la bougie arrive au bout. Tu valides chaque mail avant qu'il remplace l'ancien.", "options": ["Oui, les six et les deux nouveaux", "Oui, les six, sans en ajouter", "Seulement les deux nouveaux"]}, {"titre": "On installe Judge.me pour récolter des avis clients ?", "aide": "Gratuit. Il demande un avis par mail après la livraison et affiche les étoiles sur tes fiches produit et dans Google. Aujourd'hui, la boutique n'a aucun avis public.", "options": ["Oui, Judge.me", "Oui, mais avec une autre application"], "autre": "Laquelle, ou une question ?"}, {"titre": "Combien de publications par semaine jusqu'à Noël ?", "aide": "Tu valides, tu n'écris rien. Mais il faut que tu aies le temps de regarder.", "options": ["Trois par semaine", "Deux par semaine", "Une par semaine"]}, {"titre": "As-tu des photos de tes Maison&Objet (2024, 2025, 2026) ?", "aide": "Même prises au téléphone. C'est ton meilleur sujet, et il n'y en a aucune dans le dossier partagé.", "options": ["Oui, sur mon téléphone", "Oui, chez le photographe ou l'organisateur", "Non, aucune"], "autre": "Si oui, dis-moi comment tu préfères me les faire passer"}];
+const DEST = "info@bahiamala-collection.com";
+const SUJET = "Bahia Mala \u2014 mes r\u00e9ponses (No\u00ebl)";
+const f = document.getElementById('f'), go = document.getElementById('go'),
+      etat = document.getElementById('etat');
+const CLE = 'bm-' + SUJET;
+let rep = {};
+try { rep = JSON.parse(localStorage.getItem(CLE) || '{}'); } catch (e) {}
+
+QS.forEach((q, i) => {
+  const fs = document.createElement('fieldset');
+  const lg = document.createElement('legend');
+  lg.innerHTML = '<span class="num">QUESTION ' + (i + 1) + '</span>' +
+    '<span class="ttl"></span>';
+  lg.querySelector('.ttl').textContent = q.titre;
+  fs.appendChild(lg);
+  if (q.aide) {
+    const a = document.createElement('p'); a.className = 'aide';
+    a.textContent = q.aide; fs.appendChild(a);
+  }
+  if (q.libre) {
+    const t = document.createElement('textarea');
+    t.name = 'q' + i; t.placeholder = q.exemple || '';
+    t.value = rep['q' + i] || '';
+    t.oninput = () => { rep['q' + i] = t.value.trim(); garde(); };
+    fs.appendChild(t);
+  } else {
+    q.options.forEach(opt => {
+      const l = document.createElement('label');
+      const r = document.createElement('input');
+      r.type = 'radio'; r.name = 'q' + i; r.value = opt;
+      if (rep['q' + i] === opt) r.checked = true;
+      r.onchange = () => { rep['q' + i] = opt; garde(); };
+      const s = document.createElement('span'); s.textContent = opt;
+      l.append(r, s); fs.appendChild(l);
+    });
+    if (q.autre) {
+      const t2 = document.createElement('textarea');
+      t2.name = 'q' + i + 'a'; t2.placeholder = q.autre;
+      t2.style.marginTop = '4px'; t2.style.minHeight = '72px';
+      t2.value = rep['q' + i + 'a'] || '';
+      t2.oninput = () => { rep['q' + i + 'a'] = t2.value.trim(); garde(); };
+      fs.appendChild(t2);
+    }
+  }
+  f.appendChild(fs);
+});
+
+function garde() {
+  try { localStorage.setItem(CLE, JSON.stringify(rep)); } catch (e) {}
+  const n = QS.filter((q, i) => rep['q' + i] || rep['q' + i + 'a']).length;
+  go.disabled = n === 0;
+  etat.textContent = n === QS.length
+    ? 'Toutes les réponses sont là.'
+    : n + ' réponse' + (n > 1 ? 's' : '') + ' sur ' + QS.length +
+      '. Tu peux envoyer même si tout n\'est pas rempli.';
+}
+garde();
+
+go.onclick = () => {
+  const lignes = QS.map((q, i) =>
+    'Q' + (i + 1) + ' — ' + q.titre + '\n' +
+    '   ' + (rep['q' + i] || '(pas de réponse)') +
+    (rep['q' + i + 'a'] ? '\n   ' + rep['q' + i + 'a'] : ''));
+  const corps = lignes.join('\n\n') + '\n\n— Envoyé depuis la page de questions Bahia Mala';
+  location.href = 'mailto:' + DEST + '?subject=' +
+    encodeURIComponent(SUJET) + '&body=' + encodeURIComponent(corps);
+  etat.textContent = "Ton application mail s'ouvre. Il ne reste qu'à envoyer.";
+};
+</script></body></html>
