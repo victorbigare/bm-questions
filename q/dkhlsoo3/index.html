@@ -53,7 +53,7 @@ button[disabled]{background:#b8b3a8;cursor:default}
 </style></head><body>
 <main>
   <p class="mq">BAHIA MALA</p>
-  <p class="sub">Trois questions, une minute.</p>
+  <p class="sub">Deux questions, une minute.</p>
   <p class="intro">Bonjour Emilie, tape une réponse par question,
      puis le bouton en bas. Un seul message partira, avec tout dedans.</p>
   <form id="f"></form>
@@ -64,7 +64,7 @@ button[disabled]{background:#b8b3a8;cursor:default}
   <p class="pied">Rien ne sera publié sans que tu l'aies validé.</p>
 </main>
 <script>
-const QS = [{"titre": "Peut-on mettre le logo d'une entreprise sur tes boîtes d'allumettes ?", "aide": "Le contexte (qui l'a demandé, quand) est dans le mail, question 1.", "options": ["Oui, imprimé sur la boîte", "Oui, avec une étiquette collée", "Non, les boîtes restent telles quelles"], "autre": "Si oui : à partir de combien de boîtes, et quel délai ?"}, {"titre": "Pour les commandes en nombre, quelle remise appliquer ?", "aide": "Tes deux réponses sont citées dans le mail, question 2.", "options": ["Celle de mon devis du 14 octobre", "Celle de mes réponses de samedi", "Je décide au cas par cas"], "autre": "Une autre grille ?"}, {"titre": "Tes prix pro de bougies, c'est hors TVA ou TVA comprise ?", "aide": "Le contexte est dans le mail, question 3.", "options": ["Hors TVA", "TVA comprise"]}];
+const QS = [{"titre": "Peut-on mettre le logo d'une entreprise sur tes boîtes d'allumettes ?", "aide": "Le contexte (qui l'a demandé, quand) est dans le mail, question 1.", "options": ["Oui, imprimé sur la boîte", "Oui, avec une étiquette collée", "Non, les boîtes restent telles quelles"], "autre": "Si oui : à partir de combien de boîtes, et quel délai ?"}, {"titre": "Pour les commandes en nombre, quelle remise appliquer ?", "aide": "Tes deux réponses sont citées dans le mail, question 2.", "options": ["Celle de mon devis du 14 octobre", "Celle de mes réponses de samedi", "Je décide au cas par cas"], "autre": "Une autre grille ?"}];
 const DEST = "info@bahiamala-collection.com";
 const SUJET = "Bahia Mala \u2014 mes r\u00e9ponses (allumettes)";
 const f = document.getElementById('f'), go = document.getElementById('go'),
