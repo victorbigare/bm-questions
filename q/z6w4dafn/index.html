@@ -53,7 +53,7 @@ button[disabled]{background:#b8b3a8;cursor:default}
 </style></head><body>
 <main>
   <p class="mq">BAHIA MALA</p>
-  <p class="sub">Cinq questions, deux minutes.</p>
+  <p class="sub">Trois questions, une minute.</p>
   <p class="intro">Bonjour Emilie, tape une réponse par question,
      puis le bouton en bas. Un seul message partira, avec tout dedans.</p>
   <form id="f"></form>
@@ -64,7 +64,7 @@ button[disabled]{background:#b8b3a8;cursor:default}
   <p class="pied">Rien ne sera publié sans que tu l'aies validé.</p>
 </main>
 <script>
-const QS = [{"titre": "Peut-on mettre le logo d'une entreprise sur tes boîtes d'allumettes ?", "aide": "Une agence de cadeaux d'entreprise te l'a demandé en septembre pour la boîte Pampa (logo sur le devant ou sur le côté). D'autres clients vont le demander.", "options": ["Oui, imprimé sur la boîte", "Oui, avec une étiquette collée", "Non, les boîtes restent telles quelles"], "autre": "Si oui : à partir de combien de boîtes, et quel délai ?"}, {"titre": "Pour les commandes en nombre, quelle remise appliquer ?", "aide": "Dans ton devis d'octobre à une agence, la remise par quantité n'était pas la même que dans tes réponses de samedi. On garde laquelle pour les prochaines offres ?", "options": ["Celle de mon devis d'octobre", "Celle de mes réponses de samedi", "Je décide au cas par cas"], "autre": "Une autre grille ?"}, {"titre": "Tes prix pro, c'est hors TVA ou TVA comprise ?", "aide": "Pour l'écrire clairement dans les offres aux entreprises et aux agences.", "options": ["Hors TVA", "TVA comprise"]}, {"titre": "Ton stock de bougies Pérou est toujours celui que tu as indiqué le 14 octobre ?", "aide": "On en a besoin pour proposer les Pérou aux entreprises sans promettre ce qui n'existe pas.", "options": ["Oui, à peu près", "Non, ça a changé"], "autre": "Si ça a changé : combien environ, par taille ?"}, {"titre": "Les réponses aux clients que l'équipe prépare, on les signe comment ?", "aide": "Elles t'attendent dans les brouillons d'info@, et c'est toi qui décides de les envoyer.", "options": ["Emilie", "L'équipe Bahia Mala"]}];
+const QS = [{"titre": "Peut-on mettre le logo d'une entreprise sur tes boîtes d'allumettes ?", "aide": "Une agence de cadeaux d'entreprise te l'a demandé en septembre pour la boîte Pampa (logo sur le devant ou sur le côté). D'autres clients vont le demander.", "options": ["Oui, imprimé sur la boîte", "Oui, avec une étiquette collée", "Non, les boîtes restent telles quelles"], "autre": "Si oui : à partir de combien de boîtes, et quel délai ?"}, {"titre": "Pour les commandes en nombre, quelle remise appliquer ?", "aide": "Dans ton devis d'octobre à une agence, la remise par quantité n'était pas la même que dans tes réponses de samedi. On garde laquelle pour les prochaines offres ?", "options": ["Celle de mon devis d'octobre", "Celle de mes réponses de samedi", "Je décide au cas par cas"], "autre": "Une autre grille ?"}, {"titre": "Dans tes devis aux agences, le prix pro d'une bougie est-il hors TVA ou TVA comprise ?", "aide": "Pour les recharges, tu as écrit un prix pro « HTVA » à un client. Dans tes derniers devis de bougies, la TVA n'est pas précisée : on veut écrire la même chose que toi.", "options": ["Hors TVA", "TVA comprise"]}];
 const DEST = "info@bahiamala-collection.com";
 const SUJET = "Bahia Mala \u2014 mes r\u00e9ponses (allumettes)";
 const f = document.getElementById('f'), go = document.getElementById('go'),
