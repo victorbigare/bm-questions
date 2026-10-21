@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bahia Mala — 1 décision</title>
+<style>
+:root{--pap:#f1efe9;--enc:#1b2235;--dou:#6b7183;--fil:#e0dbd0;--nav:#1d2a4a;
+  --ok:#2e7d4f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pap);color:var(--enc);
+  font:400 17px/1.6 Georgia,'Times New Roman',serif;
+  padding:22px max(16px,env(safe-area-inset-left)) 40px}
+main{max-width:560px;margin:0 auto;background:#fff;border:1px solid var(--fil);
+  border-radius:12px;padding:26px 22px 28px}
+.mq{font:700 21px/1.2 Helvetica,Arial,sans-serif;letter-spacing:.14em;
+  color:var(--nav);margin:0 0 4px}
+.sub{margin:0 0 18px;padding-bottom:16px;border-bottom:2px solid var(--enc);
+  color:var(--dou);font-size:15px}
+.intro{margin:0 0 6px}
+fieldset{border:0;margin:26px 0 0;padding:0}
+legend{padding:0}
+.num{font:600 12px/1.3 Helvetica,Arial,sans-serif;letter-spacing:.1em;
+  color:#9a8f7d;display:block;margin-bottom:3px}
+.ttl{font:600 19px/1.35 Georgia,serif;display:block}
+.aide{color:var(--dou);font-size:15px;margin:3px 0 12px}
+label{display:flex;align-items:center;gap:12px;border:1.5px solid var(--fil);
+  border-radius:9px;padding:14px 15px;margin-bottom:9px;cursor:pointer;
+  font-size:16.5px;-webkit-tap-highlight-color:transparent}
+label:active{background:#faf8f4}
+input[type=radio]{appearance:none;width:22px;height:22px;flex:0 0 22px;
+  border:2px solid #c3bdb0;border-radius:50%;margin:0;position:relative}
+input[type=radio]:checked{border-color:var(--nav)}
+input[type=radio]:checked::after{content:"";position:absolute;inset:4px;
+  border-radius:50%;background:var(--nav)}
+label:has(:checked){border-color:var(--nav);background:#f4f6fb}
+input[type=radio]:focus-visible{outline:3px solid #8aa4e0;outline-offset:2px}
+textarea{width:100%;border:1.5px solid var(--fil);border-radius:9px;
+  padding:13px;font:inherit;font-size:16.5px;min-height:92px;resize:vertical}
+.envoi{margin-top:30px;padding-top:22px;border-top:1px solid var(--fil)}
+button{width:100%;background:var(--nav);color:#fff;border:0;border-radius:10px;
+  padding:17px 20px;font:600 17px/1.2 Helvetica,Arial,sans-serif;cursor:pointer}
+button[disabled]{background:#b8b3a8;cursor:default}
+.etat{text-align:center;color:var(--dou);font-size:14.5px;margin:11px 0 0}
+.pied{color:var(--dou);font-size:14.5px;margin:22px 0 0}
+details.mail{border:1px solid var(--fil);border-radius:9px;margin:0 0 10px;background:#faf8f3}
+details.mail summary{cursor:pointer;padding:11px 14px;font:600 15px/1.35 Helvetica,Arial,sans-serif;color:var(--nav)}
+details.mail .meta{padding:0 14px 6px;color:var(--dou);font:400 13px/1.45 Helvetica,Arial,sans-serif}
+details.mail .txt{white-space:pre-wrap;margin:0;padding:4px 14px 14px;font:400 15px/1.55 Helvetica,Arial,sans-serif;overflow-wrap:anywhere}
+.ctx{margin:4px 0 8px;font-size:15.5px;white-space:pre-line}
+.pq{margin:0 0 12px;font-size:15.5px;background:#f4f6fb;border-left:3px solid var(--nav);padding:9px 12px;border-radius:0 7px 7px 0}
+.pq b{font:600 13px/1.3 Helvetica,Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--nav);display:block;margin-bottom:2px}
+.choix-t{font:600 13px/1.3 Helvetica,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#9a8f7d;margin:16px 0 8px}
+label .eff{display:block;color:var(--dou);font-size:14px;margin-top:2px}
+.bloque{background:#fff4e5;border:1px solid #f0d9b5;border-radius:9px;padding:14px;margin-top:16px}
+@media (prefers-color-scheme:dark){
+  :root{--pap:#14181f;--enc:#e9e7e1;--dou:#99a0b0;--fil:#2d3341;--nav:#7f9fe0}
+  body{background:var(--pap);color:var(--enc)}
+  main{background:#1a1f28;border-color:var(--fil)}
+  label:has(:checked){background:#20283a}
+  .pq{background:#1d2433}
+  textarea{background:#141920;color:var(--enc)}
+  button{color:#101520}
+  .sub{border-bottom-color:var(--enc)}
+  details.mail{background:#141920}
+}
+</style></head><body>
+<main>
+  <p class="mq">BAHIA MALA</p>
+  <p class="sub">Sous chaque question : le fil complet des mails et ce qu&#x27;on propose, en entier. Lis, puis coche.</p>
+  <p class="intro">Bonjour Emilie, tape une réponse par question,
+     puis le bouton en bas. Un seul message partira, avec tout dedans.</p>
+  <form id="f"></form>
+  <div class="envoi">
+    <button id="go" type="button" disabled>Envoyer mes réponses</button>
+    <p class="etat" id="etat"></p>
+  </div>
+  <p class="pied">Rien ne sera publié sans que tu l'aies validé.</p>
+</main>
+<script>
+addEventListener('hashchange', () => location.reload());
+(async () => {
+let QS = "mPW9pqjp1gIW1_t4_WHbi7PkjIGF3n9BZbcHHW4Miwv7BU_tZ-NaXNbqvdTP2fF39L6ZSpwa_to8si02mg7ZMhc58RSzbM73smV842NlRV9can_RBjAF500_ELErA0x7N3IzBkr0Pt4QRtaVWHxy66gmklJJZ-ym7_qA8wdjyFdwN6LhVrOcQSS4T1KvYQMrySfjq83FdS9Dd1Bu0Oc-ClhZsUcDitwYdtJHbDZua0yfv5oQAyqqrBfqWL3q5HI1cGCF0KJQ06ggzvmS2IUDdVtjQhFIUNILH9Smud0f7a8pGE6qrQfnTJNSgbydCaenvio9tGVctORWPa35AuW8SelOOlu00U2vTtwE2sRNgx-eGwr26GoQjURRaZTnabtwqSkySoVH8iE0uWumXlrSGnCeUF1TB_jJSvMeV38PkNDHiImj1i5GCzphSiMpAJt8TyVqQKBc-ZGFRNvVRFmujDdjpaHV3eCqx_VTiMEEqDV2KAUhbgoPSDMjs2dnC_j7vKunbaB5X_a0g4tV8fpdYoV9LVei0EJxpTT2x8MwFBtlytwXxSmoh3beTq5nMP9nZr5am3ZRAv_mzYmcQnSfWCfv13rcoVkJ3nbZZk8nZDm1LKaw20vWrrk-vjTdaK87a4RZmhtLUU3H4wjFaLrZeUtwQ0JFe5f_5oxZ1UE7VjSnLmvIgOLKr9YDJmhkknVNtaH43r8J20xae3u8GJD0pbNacGs_BtegPDj7FwRUP-b7b2XMal_Cx3Umb8qvMxITs5Fp5CB4xZmzQJpHNI_Fpb_WaFdmmSms_quVS-CfqyMFkvPnNz11YOJyEbxLTn8qaRIjLWXh3Judz6VqgI2yEWEE-VLGvY4t6wDmES58szHlkEoxnz7u7k3xfOEHzNn2bu9lzHhu-Sm5IWvrLFr-n_WrnWHJEs74TMKpEbXXd_dEzVPAM8UZ2BAiaG8qrwWh87jaS7UgHI_j_r3RYO1F8PL4EB-lORusnxZisnQvUc-n8aamlY39V_gIeMR5HRzjfz7cbMmWtDdI6CP21rMaYS7eph7q5gCVAK_gnODtYcnoMj2aCclHw9qP4PpQDPyNa5450zPSeOmdddV1qyQ_R2K_5-sBem4x2S1Rpc1m_GqywmpbG2ukdBIS9Yb1ymYmehypjM1lo_vWd5HAY72gGpH55huhhAvacqMHCn4jedZyVBSoEj-aoKBmTxqynFIzz_cUAnlG1-VaKV6HLMA4ZCDWN6lbbc2agtD1M87zK-f-I-g4Qa5nUJsTuyTxoPXXHqBBs1RNYdZjdtNsDfJJb9cJyUySad0BvBLA_4aGonrA-yP_uLP0YGFd9OsyNU5CtvnfyGu1Bt_ilD08pGXuBN_mPRXRej07-Khpp5umhEsvt2Rb24SXxA6RmV76GV4nNnTEqFyZjLNqHL2w6op7LTz87kUjV_nFRPGq7Z7U8DEfe4-EazGjk_ev13qMjUmcDLRYf2mqWbhXW5F4F0QMJxlz3UAnEHcvKy8GOGT_RV2cabwXwCxYTZPD3dzOTNM02wvmvCI2QujyN4h-BixySjfaFTOrcH60TKVsmQCQGJRf2zGQkcuEoGfJH0e1j7GAgqweWnopXIwmhtF5WRTE6VuG8M7fvaKFtQjD_U_8oC0n4HFJu687Vaq23V2wcekZ_cpr0xAoNttvDRuSBMF6pyUkKDgIzKraKxYNcQsvWq6S06IvbtW1WZN402WK_7uXhecS4igRDxB0chUJFVNX1nrA-m9jUsK8Y0SXMeFwKAguyS6JlZgAX85xcQPPdzDYLraavjsvqlJsfvl8LKeTYyr-8Dhjj_PYi2nxcgxL8M6mutuJtwO7pWNgHnNMRsx6aJhYmPlTeUIo0jsp3-Ke3wdU05bIwVNKmu2wBHxljE1xz6VmsUwzhjDj6KTWqBLdIR48nYuivKrjd4h8VVCsnGlkuYHS-E3bo2akRWpntxXSYiFgl_cNBLROZFBg7E4cjmWuURc88tYLQcIIJ5bMzVFELzbviCYgqueV2F5AAPVkY3z71_OS8-Weq2zTuYVqnUCbPo6EtgsbeTnSIdO3IPMRglWuXFBGt686udDsyy4ym5JfKeWiP7q5g1P9Qse4cLNgVEO5Ap5Q9_rVbQCU59CRyxn1aTwF903Eo5jOc4dxO30ckyoXob1FIPBlt-xKPCZUkfW0-GyygUdnIBQP-89cgJ8Mj5yo2s5CdlNPCcmkWHAH7tO3lVZMeu80AN1aS4Q7B9cs3FQMPygFA9IivuMIyfuKFvR7P9m-dhH738HssevDDJUO83qGXQ2oyaX05fUhYj-2XlKVpfw-j5_VIcDUOTZLecN3KaUvaeWseE5c4o6r8vlFWvISfv50TdikkXk4ggO7yx7u7BsHcmcvAZAAnqO43NuAx_gzZ9zVHiSSAHm8eYWakzC9obqyGUrqk_nIAVffT4eacqb_Dt7U9PD-fJnC5E6lZbnmr27MXXSZRtj1bi_7xd8-bkTw32B2MwKdErW1tlVrXcerwLU-2V-qd0JCYa7zjDgJVilum-ZwEnlVusYMHOak3p2Z9gYk5GWRJ_weLHo-dz-lDtEi2NW-xoOGGbeIeRb8JFh8dHNkyf2cV-RCIgWNFDnW6-p90Ma6ZXGFCMZ-fXG67WCxo9etrAOqmIpSSpD8vMYVZZYRjSGaaFxvew8YeJ_oVB0eZzKmc9h0RUlq3Djom5QMndOww30168UBrupVfi1oe0Hb9NJkyw2DhlHLjOvC6i3a9PKCRlSIxmOCpzMLPEQmz-Jp162BYqjNKFzIjOGC7u9XCU4zgamhbxH5lf_cffF84Xz3IWPpUnXprtCddhz4whUE8QBNbkoQ7sl-TSBkpK8Z4Dy0NT0uCbVwu1SjBxxX59vOdwpcxMf9wxMr1e9qRPmEzCyfjicQmeHhV9w3j8W1nFIGj3XQlOlqqLMQ-2-vz2fJt16DlKfFrJ_J1CUcCfNZlioTTNnSwG9ka5MQt7F_4DJ92myqTsRYF4ziF2xdpZ7qRVBZSw1ZBWe6agwFobIg_BV3kb_cVKYUBJqsqRZcm_WEQcRyEmsF2pwVyOu2KdF8aDxDe1S4JnPwoWftKilBpmGL57-V9VC1Xg-sJiFuxewLlWF0mzlfmg-hcOQyJEK9bDTFk5WEU1mf1eSl97-FYOtlBKfJebCLfw52e_BxpoSrUHrId5MxMd1EyOy8vTQ3F5UlBuy8G9pedrcVZocpEszgIIuuLdvPOLrwxedVCX4qC9205_whg1Eb_SAJwJgcA6icG1xhgIoBU4HktIGHa2A1r4gjA9xmACg7qUz2ooffGngnP2O-N7ALN0LJk9nz0Oo_vZotYspoSZkdDihiKOuWdYvzAcr68K79xYIv3hIg5Le16JoyeGvZvM_z3tLRO-PLh_m--L8dnET5QiTtV4C6V5Nvar497fkBSPlxAVJ6gjK7klWh8WbDy8807g7N3hriqwDMgV_y46fJuHj819tR2M6NKCZt1MOczd7YzJvA-qVdMsM2lNipLDBMrShFg2TF_XPhykRYLjlUM-O7SFeDx_EVjpbpGETQQgRYApBQDRODCpfs56nUgLA638E9vjEDL2RQrK5S7SWQpND1HAWjCSApau5Hd107EhhJGjpU_498i3U3X03GXo_wqbHz8XXflL_cpfFnh_P8pwSHJev-dYgjPrUvF06ArP0p-BjIC28QVuQsWDuj2cOW6Jbfq_8-coCMTC6V6NkY4KBvPI7yQmfrvJQTssxId4paryFY1AUh_BPQyXlMVUXTtpmF7sud6kmqN8yJjDdKatsioK_YVvHEieCmhyCAz2lFKmA0o2UjACmGgH_V3NByzQPCW8DiM36FDPjjgD-5UEeGM1TMd3ehs6wrhpwJDeO88IOa7NzH-AsLnVpRok4HI5SxzRfzfxJ5JcNC8YOTGVNKleIO19P5p7iPr95G3PnEgIQ767iVzKjHrr6bJa7r8ADAprMYlonrqQWyjL6xpwXki_u_PGC8DsuUGuZ-edvbtw7U_-aY7WObxe6LG8jkGNA_TWDsmlSdaTK7WyFtQc698rxGCZY5cFn5RMefKHkHIb0rD4P-o81KP3RL7cXM3QYlhMIMd_Y6ic_3IkLoRM5IzXzgL3zyCzHuQq-283SuCcxuDVLZghUbuRP_RuPtNUr0AwQ91BVUS4DHm7oO9idj_bFhb8dKInjXGDVfjKkIhHX64cvYB6ON-cusJHfrd3hzaYZ70F3vMmIe-Bgq-ni8_RC3Z8IVvCcg5unyvMUP3Yb7YIyn0GHbcZInrbcDh-IB9DwQanN5IfWOE7hR43h0SpfCq-NZJ2MJ4-FMk20wPZAx4PWr9Af_3Q3ODYS9gPbbR9Afrcy3OUug097RQxuJaR96K_blCF5pG1i5tAmKTsenvRBJtnz06abXmNbR1KrAv9VU1N_NPb3UREo-n-ylM8t9g-pPa_I_cdBJkP1rU0ITP1nTK0SL_BXjha7XwtDaKfm8IPzAIV1yVBmLooGjlzx0R0DirTe9TrDRbtcJQcFRhS6wL92RuNQtCBAD-EI6BbRGSQhxtJH69S-3MsFeSVdQVnl2cPBXS3fq3aXnIEFBuMAcDh3m24SvjLzeSn8YE-72KwmMqRIrTAJEPZkFsJ21-UejQUsgPkGJlSLRcGVYILecaJ42V28yU8qHdeycq7Qn0JkKdzxacu0CNkMcYw79LdGCXV_9Y-ejttwWcCMUWIG6uMEDM3GOBFlz9bTRYkg6wBazQ_Nc3VJCP5y6AVB47ClJhgTUiKFwASXPNYMWKpwfrenrXUtx9ySUdgxivbUrEPDgwPxk84t9JRoqXF-miV6qb1aoCN06Btmystu4lz1SkrBQrG9NGtdgVnysPrrvPhNES_YRMpm1YLw3XypQQpKZ066mLLVcmVU8H7ek7fSlYKe6Y9ZXztMZEvgG3dwoocgLgJrgbYtaKBG-Y9y7a2jAkcD9382_dPF1bWy12hkx7PFv5XXtCQqIVZ2UTzweUYjVWxL2xsC-5NVnxjIfAi-z0ExIYZtZKkeCO40K_8_UDbG6-W_Eehy1FY5WJDUhRPcCCP8FnWMzqMYOQ5VJfDMO6gLls7vwLAbumQV03ffOo0E-c-F90EpQAqbRFfx3zI70GHVZge9gywiccg-SRts9SUK0qda3tGC_qfE7udkzDhhcQ6ZDKeOA47xvH-MUCDcdmikJnir2ZEAm6FCOEkiARkSAQf0gJXM3kzg_EknE1kYfxJRiUv8hEVdE14wYhNxb2mdAWL4inj79YXLpGGA3PsBS2PpDT7mPKzmJNvYYEj1afyVGoiyUSRdbHx4A7tnfrs9mGRaQWp0YdN947nXg6-As-Y8e0biOY2qCMzsz2Ja01MHx_cMjlxldUUcXyudkYafaYepMVsxICsSL97RbZS9QV71zxPcx_HCHFDfPW3xouNz762xZQVYqtCNDxWatvuoz4UBzslAoHGvIo9gJIkEmOnXBSky_r1AhgfjYwa8JJm2JuqKc57WcpX3xNp8eZBrU45scLRfce3fhqX2-mIODqsdrmvBB-YnXeo5t_jZfYjuYgwzi5VMcBCgW5sSC4qlIxQiAwyhWQm_4nONl-T-ga4KNi8x3ScuD1fASCuswIqdih9GWaGHh8QTz-_D7lgNtFOYsmtB2VzYCFFUDV8bTFq_Lj3DNsmtUy0vY70CjqwafTDiHJSfy6lqBAYbNG3I5NW0vDIjFRWixENxn9btb2JLC4sAqnRTtUheDX-lvqoQQhlem6y0gJUFzUdBpCehMZsx4FPp2kOoRQQcg-gC7T8f4DW_80IE_CYlrw3bMVLeoR864uo7kofP0tTVj25fWMyAewskGNlTbsprUGgGI3Upvzy9lp7zNh1YFuOz2wDf2j2sePpE2Xb9rAX7Ntxd3Z3DqMCvnNsX8IGmpjucLrgTh5T21NVplRlIgoCwYZ5If1HMLv_4-Dnsq29TdTePujYvs-KexMQyx1p0RbuuZNIrSYAvOte2ZRGrstW-YItvMBgUyC4ZF4Ji2Ath_uUsjoRVCmX_omfxiT4yS3Rwzh854WcmzX4AfwC1xl6obR-QjsUTPuDOdvFwnadHi-kCPFw9PSzP4vqP63CBWzRU6zpMJToD2vQk518wCafWeY8DATdgIZZdVByjpdMt7EkLYsYfMcRO25Ps44QOLxLp-GAdp3yCyTeprw2gBKDkrl55aSVigh4TqSY5bdLeNVf2zAa41NRvQRePVcJq2RU7M_Ld-wHzQcFkjcrefb1RW8_n8vqwiJ1Zy4D4LEOV3U2MYTTdy22J8DZ9kcYP3ai2TE22tMB-qxGvM4IUhYt5LcBYmy-cP_SCapN1vy4n-Ijjc7lxfbOjLZg9-aSC149QoByKiLsr6PMqzcp_rZPnIbk9yTnb04Lnx90kpQXt2WXw7FXV1umnP3htJ4AX2Gnii66HmAvtsY1aG3aAte765gWK76hSXQpD-xx-_SbuQ-L6peUsgIiYXaLgfmJMKFdKjvCXKhjLjrYPHEegjtRNDmv-FlkXK";
+if (typeof QS === 'string') {
+  const k = new URLSearchParams(location.hash.slice(1)).get('k');
+  const d = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((s.length + 3) % 4)), c => c.charCodeAt(0));
+  try {
+    const raw = d(QS), key = await crypto.subtle.importKey('raw', d(k), 'AES-GCM', false, ['decrypt']);
+    QS = JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name: 'AES-GCM', iv: raw.slice(0, 12)}, key, raw.slice(12))));
+  } catch (e) {
+    document.getElementById('f').innerHTML = '<p class="bloque">Ouvre cette page depuis le bouton du mail : le lien complet contient la clé qui affiche les mails.</p>';
+    return;
+  }
+}
+const DEST = "info@bahiamala-collection.com";
+const SUJET = "Bahia Mala \u2014 ma r\u00e9ponse pour Ayano";
+const f = document.getElementById('f'), go = document.getElementById('go'),
+      etat = document.getElementById('etat');
+const CLE = 'bm-' + SUJET;
+let rep = {};
+try { rep = JSON.parse(localStorage.getItem(CLE) || '{}'); } catch (e) {}
+
+QS.forEach((q, i) => {
+  const fs = document.createElement('fieldset');
+  const lg = document.createElement('legend');
+  lg.innerHTML = '<span class="num">QUESTION ' + (i + 1) + '</span>' +
+    '<span class="ttl"></span>';
+  lg.querySelector('.ttl').textContent = q.titre;
+  fs.appendChild(lg);
+  if (q.aide) {
+    const a = document.createElement('p'); a.className = 'aide';
+    a.textContent = q.aide; fs.appendChild(a);
+  }
+  if (q.contexte) {
+    const c = document.createElement('p'); c.className = 'ctx';
+    c.textContent = q.contexte; fs.appendChild(c);
+  }
+  if (q.pourquoi) {
+    const w = document.createElement('p'); w.className = 'pq';
+    w.innerHTML = '<b>Pourquoi on te le demande</b>';
+    w.append(document.createTextNode(q.pourquoi)); fs.appendChild(w);
+  }
+  (q.mails || []).forEach(m => {
+    const dt = document.createElement('details'); dt.className = 'mail'; dt.open = true;
+    const sm = document.createElement('summary'); sm.textContent = m.titre;
+    const me = document.createElement('div'); me.className = 'meta';
+    me.textContent = [m.de && 'De : ' + m.de, m.a && 'À : ' + m.a, m.date, m.objet && 'Objet : ' + m.objet].filter(Boolean).join(' · ');
+    dt.append(sm, me);
+    if (m.texte) {
+      const tx = document.createElement('p'); tx.className = 'txt'; tx.textContent = m.texte;
+      dt.appendChild(tx);
+    }
+    if (m.image) {
+      const im = document.createElement('img'); im.src = m.image; im.alt = m.titre;
+      im.style.cssText = 'display:block;width:100%;max-width:376px;margin:10px auto;border:1px solid #d8d2c4;';
+      dt.appendChild(im);
+    }
+    fs.appendChild(dt);
+  });
+  if (q.libre) {
+    const t = document.createElement('textarea');
+    t.name = 'q' + i; t.placeholder = q.exemple || '';
+    t.value = rep['q' + i] || '';
+    t.oninput = () => { rep['q' + i] = t.value.trim(); garde(); };
+    fs.appendChild(t);
+  } else {
+    if (q.mails && q.mails.length) {
+      const ct = document.createElement('p'); ct.className = 'choix-t';
+      ct.textContent = 'Ta décision'; fs.appendChild(ct);
+    }
+    q.options.forEach(o => {
+      const opt = typeof o === 'string' ? o : o.label;
+      const l = document.createElement('label');
+      const r = document.createElement('input');
+      r.type = 'radio'; r.name = 'q' + i; r.value = opt;
+      if (rep['q' + i] === opt) r.checked = true;
+      r.onchange = () => { rep['q' + i] = opt; garde(); };
+      const s = document.createElement('span'); s.textContent = opt;
+      if (o.effet) {
+        const ef = document.createElement('span'); ef.className = 'eff';
+        ef.textContent = '→ ' + o.effet; s.appendChild(ef);
+      }
+      l.append(r, s); fs.appendChild(l);
+    });
+    if (q.autre) {
+      const t2 = document.createElement('textarea');
+      t2.name = 'q' + i + 'a'; t2.placeholder = q.autre;
+      t2.style.marginTop = '4px'; t2.style.minHeight = '72px';
+      t2.value = rep['q' + i + 'a'] || '';
+      t2.oninput = () => { rep['q' + i + 'a'] = t2.value.trim(); garde(); };
+      fs.appendChild(t2);
+    }
+  }
+  f.appendChild(fs);
+});
+
+function garde() {
+  try { localStorage.setItem(CLE, JSON.stringify(rep)); } catch (e) {}
+  const n = QS.filter((q, i) => rep['q' + i] || rep['q' + i + 'a']).length;
+  go.disabled = n === 0;
+  etat.textContent = n === QS.length
+    ? 'Toutes les réponses sont là.'
+    : n + ' réponse' + (n > 1 ? 's' : '') + ' sur ' + QS.length +
+      '. Tu peux envoyer même si tout n\'est pas rempli.';
+}
+garde();
+
+go.onclick = () => {
+  const lignes = QS.map((q, i) =>
+    'Q' + (i + 1) + ' — ' + q.titre + '\n' +
+    '   ' + (rep['q' + i] || '(pas de réponse)') +
+    (rep['q' + i + 'a'] ? '\n   ' + rep['q' + i + 'a'] : ''));
+  const corps = lignes.join('\n\n') + '\n\n— Envoyé depuis la page de questions Bahia Mala';
+  location.href = 'mailto:' + DEST + '?subject=' +
+    encodeURIComponent(SUJET) + '&body=' + encodeURIComponent(corps);
+  etat.textContent = "Ton application mail s'ouvre. Il ne reste qu'à envoyer.";
+};
+})();
+</script></body></html>
